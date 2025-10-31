@@ -1,0 +1,152 @@
+﻿<Window x:Class="IoTDeviceManager.Views.EditDeviceWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Edit Device" 
+        Height="500" 
+        Width="550"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="CanResize"
+        MinHeight="400"
+        MinWidth="450">
+
+    <Window.Resources>
+        <Style x:Key="LabelStyle" TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Margin" Value="0,10,0,5"/>
+            <Setter Property="FontSize" Value="13"/>
+        </Style>
+
+        <Style x:Key="TextBoxStyle" TargetType="TextBox">
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="BorderBrush" Value="#BDC3C7"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Padding" Value="20,10"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Grid.Row="0" 
+                Background="#3498DB" 
+                Padding="15">
+            <TextBlock Text="Edit Device Information" 
+                       FontSize="18" 
+                       FontWeight="Bold" 
+                       Foreground="White"/>
+        </Border>
+
+        <!-- Scrollable Form Content -->
+        <ScrollViewer Grid.Row="1" 
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled"
+                      Margin="20,20,20,0">
+            <StackPanel>
+                <TextBlock Text="Device Name:" Style="{StaticResource LabelStyle}"/>
+                <TextBox x:Name="txtName" 
+                         Style="{StaticResource TextBoxStyle}"
+                         TabIndex="0"/>
+
+                <TextBlock Text="Device Type:" Style="{StaticResource LabelStyle}"/>
+                <ComboBox x:Name="cmbType" 
+                          Padding="8" 
+                          FontSize="13"
+                          BorderBrush="#BDC3C7"
+                          TabIndex="1">
+                    <ComboBoxItem Content="Sensor"/>
+                    <ComboBoxItem Content="Actuator"/>
+                    <ComboBoxItem Content="Gateway"/>
+                    <ComboBoxItem Content="Controller"/>
+                    <ComboBoxItem Content="Monitor"/>
+                </ComboBox>
+
+                <TextBlock Text="IP Address:" Style="{StaticResource LabelStyle}"/>
+                <TextBox x:Name="txtIpAddress" 
+                         Style="{StaticResource TextBoxStyle}"
+                         TabIndex="2"/>
+
+                <TextBlock Text="Location:" Style="{StaticResource LabelStyle}"/>
+                <TextBox x:Name="txtLocation" 
+                         Style="{StaticResource TextBoxStyle}"
+                         TabIndex="3"
+                         ToolTip="e.g., Production Floor A, Server Room, Assembly Line 1"/>
+
+                <TextBlock Text="Units:" Style="{StaticResource LabelStyle}"/>
+                <ComboBox x:Name="cmbUnits" 
+                          Padding="8" 
+                          FontSize="13"
+                          BorderBrush="#BDC3C7"
+                          IsEditable="True"
+                          TabIndex="4"
+                          ToolTip="Select or enter measurement unit">
+                    <ComboBoxItem Content="°C"/>
+                    <ComboBoxItem Content="°F"/>
+                    <ComboBoxItem Content="%"/>
+                    <ComboBoxItem Content="kPa"/>
+                    <ComboBoxItem Content="PSI"/>
+                    <ComboBoxItem Content="Hz"/>
+                    <ComboBoxItem Content="RPM"/>
+                    <ComboBoxItem Content="V"/>
+                    <ComboBoxItem Content="A"/>
+                    <ComboBoxItem Content="W"/>
+                    <ComboBoxItem Content="N/A"/>
+                </ComboBox>
+
+                <TextBlock Text="Firmware Version:" Style="{StaticResource LabelStyle}"/>
+                <TextBox x:Name="txtFirmware" 
+                         Style="{StaticResource TextBoxStyle}"
+                         TabIndex="5"/>
+
+                <CheckBox x:Name="chkIsOnline" 
+                          Content="Device is Online" 
+                          Margin="0,20,0,20"
+                          FontSize="13"
+                          FontWeight="SemiBold"
+                          TabIndex="4"/>
+
+                <!-- Extra spacing at bottom for scroll comfort -->
+                <Border Height="20"/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Action Buttons (Fixed at bottom) -->
+        <Border Grid.Row="2" 
+                Background="#F8F9FA"
+                BorderBrush="#BDC3C7"
+                BorderThickness="0,1,0,0"
+                Padding="20,15">
+            <StackPanel Orientation="Horizontal" 
+                        HorizontalAlignment="Right">
+                <Button x:Name="btnSave" 
+                        Content="💾 Save" 
+                        Click="BtnSave_Click"
+                        Background="#27AE60"
+                        Style="{StaticResource ButtonStyle}"
+                        TabIndex="5"
+                        IsDefault="True"/>
+                <Button x:Name="btnCancel" 
+                        Content="✖ Cancel" 
+                        Click="BtnCancel_Click"
+                        Background="#95A5A6"
+                        Style="{StaticResource ButtonStyle}"
+                        TabIndex="6"
+                        IsCancel="True"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
