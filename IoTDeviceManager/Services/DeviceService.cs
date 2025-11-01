@@ -28,7 +28,7 @@ namespace IoTDeviceManager.Services
                 new Device
                 {
                     Id = Guid.NewGuid().ToString(),
-                    Name = "Temperature Sensor 01",
+                    Name = "Temperature",
                     Type = "Sensor",
                     IpAddress = "192.168.1.101",
                     IsOnline = true,
@@ -40,7 +40,7 @@ namespace IoTDeviceManager.Services
                 new Device
                 {
                     Id = Guid.NewGuid().ToString(),
-                    Name = "Humidity Sensor 02",
+                    Name = "Humidity",
                     Type = "Sensor",
                     IpAddress = "192.168.1.102",
                     IsOnline = true,
@@ -52,7 +52,7 @@ namespace IoTDeviceManager.Services
                 new Device
                 {
                     Id = Guid.NewGuid().ToString(),
-                    Name = "Smart Actuator 01",
+                    Name = "Sn Actuator",
                     Type = "Actuator",
                     IpAddress = "192.168.1.201",
                     IsOnline = false,
@@ -64,7 +64,7 @@ namespace IoTDeviceManager.Services
                 new Device
                 {
                     Id = Guid.NewGuid().ToString(),
-                    Name = "Gateway Device",
+                    Name = "Ga Gateway",
                     Type = "Gateway",
                     IpAddress = "192.168.1.1",
                     IsOnline = true,
@@ -76,7 +76,7 @@ namespace IoTDeviceManager.Services
                 new Device
                 {
                     Id = Guid.NewGuid().ToString(),
-                    Name = "Pressure Monitor",
+                    Name = "Pr Sensor",
                     Type = "Sensor",
                     IpAddress = "192.168.1.103",
                     IsOnline = false,
@@ -119,6 +119,8 @@ namespace IoTDeviceManager.Services
             existingDevice.Type = updatedDevice.Type;
             existingDevice.IpAddress = updatedDevice.IpAddress;
             existingDevice.FirmwareVersion = updatedDevice.FirmwareVersion;
+            existingDevice.Units = updatedDevice.Units;
+            existingDevice.Location = updatedDevice.Location;
             existingDevice.IsOnline = updatedDevice.IsOnline;
             existingDevice.LastSeen = DateTime.Now;
 

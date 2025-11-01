@@ -85,6 +85,9 @@ namespace IoTDeviceManager.ViewModel
             _deviceService = new DeviceService();
             _communicationService = new DeviceCommunicationService();
 
+            // Link device service to communication service
+            _communicationService.SetDeviceService(_deviceService);
+
             // Initialize collections
             Devices = new ObservableCollection<Device>();
             Logs = new ObservableCollection<LogEntry>();
@@ -122,7 +125,7 @@ namespace IoTDeviceManager.ViewModel
 
         private void AddDevice(object parameter)
         {
-            var editWindow = new IoTDeviceManager.Views.EditDeviceWindow();
+            var editWindow = new EditDeviceWindow();
             if (editWindow.ShowDialog() == true)
             {
                 var newDevice = editWindow.Device;
@@ -140,7 +143,7 @@ namespace IoTDeviceManager.ViewModel
         {
             if (SelectedDevice == null) return;
 
-            var editWindow = new IoTDeviceManager.Views.EditDeviceWindow(SelectedDevice);
+            var editWindow = new EditDeviceWindow(SelectedDevice);
             if (editWindow.ShowDialog() == true)
             {
                 if (_deviceService.UpdateDevice(SelectedDevice))
@@ -230,7 +233,10 @@ namespace IoTDeviceManager.ViewModel
             // Update on UI thread
             Application.Current.Dispatcher.Invoke(() =>
             {
-                string dataMessage = $"[{e.Timestamp:HH:mm:ss}] {e.DeviceId}: {e.DataType} = {e.Value}{e.Unit}";
+                // Use the device name from the event (which comes from an online device)
+                string deviceDisplayName = e.DeviceName ?? e.DeviceId;
+                string dataMessage = $"[{e.Timestamp:HH:mm:ss}] {deviceDisplayName}: {e.DataType} = {e.Value}{e.Unit}";
+
                 RealtimeData.Insert(0, dataMessage);
 
                 // Keep only last 50 entries
@@ -239,7 +245,7 @@ namespace IoTDeviceManager.ViewModel
                     RealtimeData.RemoveAt(RealtimeData.Count - 1);
                 }
 
-                AddLog("Data Received", e.DeviceId, $"{e.DataType}: {e.Value}{e.Unit}", LogLevel.Info);
+                AddLog("Data Received", deviceDisplayName, $"{e.DataType}: {e.Value}{e.Unit}", LogLevel.Info);
             });
         }
 
