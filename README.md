@@ -290,23 +290,6 @@ IoTDeviceManager/
    - Background task processing
    - Performance monitoring
 
-## Troubleshooting
-
-### Build Errors
-- **Namespace Issues:** Ensure all files use correct namespace format
-- **Missing References:** Check project references in Solution Explorer
-- **XAML Errors:** Verify all x:Class attributes match code-behind
-
-### Runtime Issues
-- **Window Not Appearing:** Check App.xaml StartupUri path
-- **Data Not Binding:** Verify DataContext is set to MainViewModel
-- **Commands Not Working:** Ensure RelayCommand is properly implemented
-
-### Communication Issues
-- **Too Many Errors:** Normal behavior (10% simulated failure rate)
-
----
-
 **Developed By:** Mohammad `Ashrull B Zukaimi  
 **Date:** 1/11/2025
 **Version:** 1.0.0  
